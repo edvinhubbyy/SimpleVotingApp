@@ -1,0 +1,34 @@
+﻿@model List<SimpleVotingApp.Models.Candidate>
+
+    <h2 class="mb-5">Select a Candidate</h2>  <!-- Increased margin bottom for the heading -->
+    @if (Model.Any())
+    {
+    <h3 class="mb-4">Available Candidates</h3>  <!-- Increased margin bottom for this subheading -->
+    <form method="post">
+        <div>
+            @foreach (var candidate in Model)
+            {
+            <div>
+                <input type="radio" name="selectedCandidateId" value="@candidate.Id" /> @candidate.Name
+            </div>
+            }
+        </div>
+
+        <!-- Add margin here for spacing between the list and the button -->
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary">Vote</button>
+        </div>
+    </form>
+    }
+    else
+    {
+    <p>No candidates available. Please add some candidates to vote.</p>
+    }
+
+    @* Display errors if any *@
+    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+    {
+    <div class="alert alert-danger mt-4">
+        @error.ErrorMessage
+    </div>
+    }

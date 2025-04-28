@@ -1,0 +1,43 @@
+﻿@model List<SimpleVotingApp.Models.Candidate>
+
+    @{
+    ViewData["Title"] = "Manage Candidates";
+    }
+
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <h3>Add a New Candidate</h3>
+    <form method="post" action="/Voting/Add">
+        <div class="form-group">
+            <label for="name">Candidate Name</label>
+            <input type="text" id="name" name="name" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Add Candidate</button>
+    </form>
+
+    <hr class="my-4" />
+
+    <h3>Current Candidates</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var candidate in Model)
+            {
+            <tr>
+                <td>
+                    <form method="post" action="/Voting/EditInline" class="d-flex align-items-center">
+                        <input type="hidden" name="id" value="@candidate.Id" />
+                        <input type="text" name="name" value="@candidate.Name" class="form-control form-control-sm me-2" />
+                        <button type="submit" class="btn btn-success btn-sm me-1">Save</button>
+                        <a href="/Voting/Remove/@candidate.Id" class="btn btn-danger btn-sm">Remove</a>
+                    </form>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>

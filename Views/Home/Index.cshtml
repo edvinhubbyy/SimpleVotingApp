@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h2 class="display-4 mb-4">Здравейте</h2> <!-- Larger title with bottom margin -->
+        <h2 class="display-4 mb-4">Можете да гласувате сега!</h2> <!-- Larger title with bottom margin -->
+        <p class="lead mb-4">Добре дошли в приложението за просто гласуване. Изберете любимия си кандидат и накарайте гласа си да бъде чут. Става бързо, лесно и сигурно!</p> <!-- A short description -->
+
+        <div class="d-flex justify-content-center mb-5">
+            <a href="/Voting/Vote" class="btn btn-primary btn-lg px-4 py-2">Започнете да гласувате</a> <!-- A call to action button -->
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Защо да гласувате?</h5>
+                        <p class="card-text">Гласуването ви дава силата да влияете върху промяната във вашата общност. Вашето мнение е важно, а вашият глас се брои!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Как работи</h5>
+                        <p class="card-text">
+                            Просто изберете своя кандидат, изпратете гласа си и сте готови! Системата е лесна за използване и напълно защитена.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Add a background image -->
+<style>
+    body {
+        background-image: url('https://source.unsplash.com/1600x900/?voting,politics');
+        background-size: cover;
+        background-position: center center;
+        color: black;
+    }
+
+    h2 {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .btn {
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+</style>
