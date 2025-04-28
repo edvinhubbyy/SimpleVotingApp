@@ -47,7 +47,10 @@ namespace SimpleVotingApp.Controllers
                 _context.SaveChanges();
 
                 // Return a simple thank you message without looking for a view
-                return Content("Thank you for your vote! Your vote has been successfully recorded.");
+
+                return RedirectToAction("ThankYou");
+
+
             }
             else
             {

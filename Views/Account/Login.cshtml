@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<!-- Container for centering the form -->
+<div class="container d-flex justify-content-center align-items-center min-vh-80">
+    <div class="card shadow-lg" style="width: 400px;">
+        <div class="card-body">
+            <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+            }
+
+            <!-- Login Form -->
+            <form method="post">
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Enter username" required />
+                    </div>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" required />
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </div>
+            </form>
+
+            
+        </div>
+    </div>
+</div>
+
+<!-- Link to Font Awesome for icons -->
+@* Add Font Awesome CDN for icons *@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">

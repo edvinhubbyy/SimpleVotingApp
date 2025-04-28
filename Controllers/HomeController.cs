@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SimpleVotingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace SimpleVotingApp.Controllers
@@ -22,6 +24,13 @@ namespace SimpleVotingApp.Controllers
         {
             return View();
         }
+
+        public IActionResult ThankYou()
+        {
+            return View();
+        }
+
+
 
         public IActionResult Privacy()
         {

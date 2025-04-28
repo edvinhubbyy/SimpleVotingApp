@@ -62,7 +62,7 @@ namespace SimpleVotingApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");  // Set default route to login page
             });
         }
 

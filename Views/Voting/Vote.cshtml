@@ -1,34 +1,51 @@
 ﻿@model List<SimpleVotingApp.Models.Candidate>
 
-    <h2 class="mb-5">Select a Candidate</h2>  <!-- Increased margin bottom for the heading -->
-    @if (Model.Any())
-    {
-    <h3 class="mb-4">Available Candidates</h3>  <!-- Increased margin bottom for this subheading -->
-    <form method="post">
-        <div>
-            @foreach (var candidate in Model)
+@{
+    ViewData["Title"] = "Select a Candidate";
+}
+
+<!-- Container for centering content -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg" style="width: 500px;">
+        <div class="card-body">
+            <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+            @if (Model.Any())
             {
-            <div>
-                <input type="radio" name="selectedCandidateId" value="@candidate.Id" /> @candidate.Name
-            </div>
+                <h3 class="text-center mb-4">Available Candidates</h3>
+                
+                <form method="post">
+                    <div class="list-group">
+                        @foreach (var candidate in Model)
+                        {
+                            <div class="list-group-item d-flex align-items-center">
+                                <input type="radio" name="selectedCandidateId" value="@candidate.Id" class="form-check-input me-2" />
+                                <label class="form-check-label" for="selectedCandidateId">@candidate.Name</label>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Add spacing between the list and the button -->
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary w-100">Vote</button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p class="text-center text-muted">No candidates available. Please add some candidates to vote.</p>
+            }
+
+            <!-- Display errors, if any -->
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div class="alert alert-danger mt-4">
+                    @error.ErrorMessage
+                </div>
             }
         </div>
-
-        <!-- Add margin here for spacing between the list and the button -->
-        <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Vote</button>
-        </div>
-    </form>
-    }
-    else
-    {
-    <p>No candidates available. Please add some candidates to vote.</p>
-    }
-
-    @* Display errors if any *@
-    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-    {
-    <div class="alert alert-danger mt-4">
-        @error.ErrorMessage
     </div>
-    }
+</div>
+
+<!-- Link to Font Awesome for icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
