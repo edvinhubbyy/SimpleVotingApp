@@ -1,14 +1,11 @@
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SimpleVotingApp
 {
@@ -21,7 +18,6 @@ namespace SimpleVotingApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
@@ -29,9 +25,14 @@ namespace SimpleVotingApp
             services.AddDbContext<VotingContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options =>
+                    {
+                        options.LoginPath = "/Account/Login"; // Redirect to this path if not authenticated
+                    });
+            services.AddHttpContextAccessor(); // Required for IHttpContextAccessor injection
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
@@ -49,22 +50,23 @@ namespace SimpleVotingApp
 
             app.UseRouting();
 
+            // Make sure authentication is enabled before authorization
+            app.UseAuthentication();  // <== Make sure this is BEFORE UseAuthorization()
             app.UseAuthorization();
 
-            // Use IServiceScopeFactory to get a scope and seed the database
+
             using (var scope = serviceProvider.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<VotingContext>();
-                VotingContext.SeedDatabase(context);  // Call the SeedDatabase method
+                VotingContext.SeedDatabase(context);
             }
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Account}/{action=Login}/{id?}");  // Set default route to login page
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
         }
-
     }
 }

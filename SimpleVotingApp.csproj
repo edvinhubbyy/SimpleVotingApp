@@ -16,6 +16,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Optivem.Framework.Infrastructure.FluentValidation" Version="1.0.12" />
   </ItemGroup>
 
 </Project>
